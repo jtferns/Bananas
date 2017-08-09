@@ -4,9 +4,13 @@ import {
   Text,
   StyleSheet,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 
 import { connect } from 'react-redux';
+import { ListItem } from 'react-native-elements';
+
+import { fetchDataFromAPI } from '../../actions/cityActions';
 
 class Cities extends React.Component {
   static navigationOptions = {
@@ -16,11 +20,26 @@ class Cities extends React.Component {
       resizeMode='contain'
     />
   }
+  componentDidMount() {
+    this.props.dispatchFetchDataFromAPI()
+  }
   render() {
-    console.log('props:', this.props)
+    const { navigation } = this.props;
+    const cities = Object.values(this.props.cities);
     return (
       <View style={styles.container}>
-        <Text>Hello from Cities</Text>
+        {
+          cities.length === 0 ?
+          <ActivityIndicator style={{ flex: 1, alignItems: 'center' }} color='#1f78b4' size='large'/>
+          :
+          cities.map((city, index) => (
+            <ListItem
+              onPress={() => navigation.navigate('City', city)}
+              key={index}
+              title={city.name}
+            />
+          ))
+        }
       </View>
     )
   }
@@ -29,8 +48,9 @@ class Cities extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#fee8c8',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   }
 })
 
@@ -40,4 +60,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Cities)
+const mapDispatchToProps = {
+  dispatchFetchDataFromAPI: () => fetchDataFromAPI()
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities)

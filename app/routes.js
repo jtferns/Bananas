@@ -9,6 +9,7 @@ const RouteConfig = {
   Cities: {
     screen: CitiesTab,
     navigationOptions: {
+      tabBarLabel: 'Cities',
       tabBarIcon: ({ tintColor }) => (
         <Image
           source={require('./assets/cityicon.png')}
@@ -20,11 +21,11 @@ const RouteConfig = {
   AddCity: {
     screen: AddCity,
     navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
+      tabBarLabel: 'Add City',
+      tabBarIcon: ({ tintColor }) => (
         <Image
           source={require('./assets/addicon.png')}
           style={{ tintColor, width: 28, height: 28}}
-          labelStyle={{ fontSize: focused?25:12 }}
         />
       )
     }
