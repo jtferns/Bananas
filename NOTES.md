@@ -1,0 +1,9 @@
+- Is there a good way for simple testing?
+  - yes; Visual Studio Mobile Center can run React Native tests;
+- It's important to have crash reporting in your native apps
+- Human Interface Guidelines via Apple
+- Loss of internet connectivity should be handled well
+- Apps should be complete (will be rejected for Coming Soon sections)
+- Appium.io
+- Reselect YouTube training video
+- Mobx vs Redux for React Native state management
